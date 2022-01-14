@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import CountriesList from "../components/CountriesList"
 import DetailsModal from "../components/DetailsModal"
+import Loader from "../components/Layout/Loader"
 import { PaginationComponent } from "../components/PaginationComponent"
 import Search from "../components/Search/Search"
 import { useCountriesValues } from "../context/Countries.context"
@@ -10,7 +11,7 @@ import { Country } from "../shared/Country"
 
 const Home = () => {
 
-    const { nrOfPages, countries, countriesInPage } = useCountriesValues()
+    const { nrOfPages, countries, countriesInPage, loader } = useCountriesValues()
 
     const [currPage, setCurrPage] = useState<number>(1)
     const [countriesList, setCountriesList] = useState<Country[]>([]);
@@ -48,11 +49,19 @@ const Home = () => {
 
     return (
         <>
-            <DetailsModal show={showDetailsModal} country={country} handleClose={handleClose}/>
-            <Search handleCountries={handleCountries} placeholder={'Search Countries'} byRegion={false} reset={resetCountriesList}/>
-            <Search handleCountries={handleCountries} placeholder={'Filter by region'} byRegion={true} reset={resetCountriesList}/>
-            <CountriesList countries={countriesList} open={openDetailsModal}/>
-            {!hidePagination && <PaginationComponent nrOfPages={nrOfPages} goToPage={goToPage} currPage={currPage}/>}
+         { loader ? (
+             <>
+                <DetailsModal show={showDetailsModal} country={country} handleClose={handleClose}/>
+                <Search handleCountries={handleCountries} placeholder={'Search Countries'} byRegion={false} reset={resetCountriesList}/>
+                <Search handleCountries={handleCountries} placeholder={'Filter by region'} byRegion={true} reset={resetCountriesList}/>
+                <CountriesList countries={countriesList} open={openDetailsModal}/>
+                {!hidePagination && <PaginationComponent nrOfPages={nrOfPages} goToPage={goToPage} currPage={currPage}/>}
+            </>
+        ) : (
+            <Loader />
+        )
+        }
+
         </>
     )
 }

@@ -13,7 +13,8 @@ interface ContextProps {
     nrOfCountries:number,
     nrOfPages: number,
     countriesInPage: number,
-    regions: string[]
+    regions: string[],
+    loader: boolean
   }
 
   const defaultProps = {
@@ -21,20 +22,24 @@ interface ContextProps {
     nrOfCountries:0,
     nrOfPages: 0,
     countriesInPage: 0,
-    regions: []
+    regions: [],
+    loader: false
   }
 
 
 export const CountriesContext = React.createContext<ContextProps>(defaultProps);
 
 export const CountriesProvider = ({children}: AuxProps) => {
-  const {countries,
+  const {
+    countries,
     countriesInPage,
     nrOfPages,
-    nrOfCountries, regions} = useCountries();
+    nrOfCountries, 
+    regions,
+    loader} = useCountries();
 
   return (
-    <CountriesContext.Provider value = {{countries, nrOfCountries, nrOfPages, countriesInPage, regions}}>
+    <CountriesContext.Provider value = {{countries, nrOfCountries, nrOfPages, countriesInPage, regions, loader}}>
     {children}
     </CountriesContext.Provider>
   );

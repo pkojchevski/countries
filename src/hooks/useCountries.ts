@@ -9,9 +9,11 @@ const useCountries = () => {
   const [nrOfPages, setNrOfPages] = useState<number>(0)
   const [nrOfCountries, setNrOfCountries] = useState<number>(0)
   const [regions, setRegions] = useState<string[]>([])
+  const [loader, setLoader] = useState<boolean>(false)
 
   const fetchCountries = React.useCallback(async () => {
     let response =  await instance.get('')
+    setLoader(false)
     setNrOfPages(Math.ceil(response.data.length/countriesInPage))
     setNrOfCountries(response.data.length)
     setCountries(response.data.map((data: any) => ({
@@ -24,6 +26,7 @@ const useCountries = () => {
         flags: data.flags})
          ))
     setRegions(uniq(response.data.map((c: any) => c.region)))
+    setLoader(true)
   }, [])
 
   useEffect(() => {
@@ -37,7 +40,8 @@ const useCountries = () => {
       countriesInPage,
       nrOfPages,
       nrOfCountries,
-      regions
+      regions,
+      loader
   };
 };
 
