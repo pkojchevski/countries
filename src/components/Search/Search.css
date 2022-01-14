@@ -1,0 +1,80 @@
+.marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .marker-text {
+    font-size: 10px;
+  }
+  
+  .recharts-wrapper {
+    margin: auto;
+  }
+  
+  /* .chart {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+  } */
+  
+  .search-input {
+    /* position: absolute;
+    top: 0rem;
+    left: 0rem;
+    z-index: 1; */
+    width: 100vw;
+    /* left: 50%;
+    transform: translate(-50%, 0); */
+  }
+  
+  input {
+    border: 1px solid #999;
+    padding: 0.5rem;
+    width: 100%;
+  }
+  
+  .no-suggestions {
+    color: #999;
+    padding: 0.5rem;
+  }
+  
+  .suggestions {
+    border: 1px solid #999;
+    border-top-width: 0;
+    list-style: none;
+    margin-top: -15px;
+    max-height: 143px;
+    overflow-y: auto;
+    padding-left: 0;
+    width: 100%;
+  }
+  
+  .suggestions li {
+    padding: 0.5rem;
+  }
+  
+  .svg-map {
+    display: block;
+    width: 100%;
+    height: 300px;
+  }
+  
+  svg .country:hover {
+    stroke: black;
+    stroke-width: 1px;
+    cursor: pointer;
+  }
+  
+  .suggestion-active,
+  .suggestions li:hover {
+    background-color: #008f68;
+    color: #fae042;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  
+  .suggestions li:not(:last-of-type) {
+    border-bottom: 1px solid #999;
+  }
